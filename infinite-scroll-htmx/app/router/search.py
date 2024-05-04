@@ -19,6 +19,7 @@ async def serve_search_results(request: Request, search_input: str = Query(None,
         doc_info = {
             "title": result['title'],
             "description": result['description'],
+            "url": "/docs/{}".format(result["title"])
         }
 
         matches.append(doc_info)

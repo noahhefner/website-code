@@ -9,7 +9,7 @@ import re
 from fastapi import Request
 from app import templates
 from app.router import router
-import app.database
+from app.database import documents
 
 VALID_FILENAME_PATTERN = re.compile(r'^[a-zA-Z0-9_-]+$')
 
@@ -22,7 +22,7 @@ async def serve_content_page(filename: str, request: Request):
     if (not filename_ok):
         return templates.TemplateResponse(request=request, name="pages/400.html", status_code=404)
 
-    content = await database.documents.get_content(filename)
+    content = await documents.get_content(filename)
     if (content):
         context = {
             "filename": filename,

@@ -9,7 +9,7 @@ def main():
     for i in range(500):
 
         document = {
-            "title": "Document " + str(i),
+            "title": "Document" + str(i),
             "description": "Description " + str(i),
             "content": "Content of document " + str(i)
         }

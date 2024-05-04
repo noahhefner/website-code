@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Infinite Scroll HTMX</title>
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+  </head>
+  <body>
+    <form
+      hx-get="/search"
+      hx-swap="innerHTML"
+      hx-target="#search-results"
+      hx-trigger="submit"
+    >
+      <input
+        type="text"
+        id="search-input"
+        name="search_input"
+        placeholder="Search"
+        maxlength="64"
+      />
+    </form>
+    <div id="search-results"></div>
+  </body>
+</html>

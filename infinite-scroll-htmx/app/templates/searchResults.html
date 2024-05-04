@@ -1,0 +1,34 @@
+{% for match in matches %}
+{% if not loop.last %}
+
+<div>
+<a href={{ match["url"] }}>
+    <h2>
+        {{ match["title"] }}
+    </h2>
+</a>
+
+<p>
+{{ match["description"] }}
+</p>
+</div>
+
+{% else %}
+
+<div hx-get="/search?search_input={{ search_input }}&skip={{ skip + limit }}&limit={{ limit }}" 
+    hx-trigger="revealed"
+    hx-swap="afterend">
+<a href={{ match["url"] }}>
+    <h2>
+        {{ match["title"] }}
+    </h2>
+</a>
+
+<p>
+{{ match["description"] }}
+</p>
+</div>
+
+{% endif %}
+
+{% endfor %}

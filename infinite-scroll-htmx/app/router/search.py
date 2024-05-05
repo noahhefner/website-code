@@ -4,13 +4,12 @@ from fastapi import Request, Query
 from app import templates
 from app.router import router
 from app.database import documents
+import time
 
 @router.get("/search")
-async def serve_search_results(request: Request, search_input: str = Query(None, alias="search_input"), skip: int = Query(0, ge=0), limit: int = Query(10, ge=0)):
+async def serve_search_results(request: Request, query: str = Query(None), limit: int = Query(10, ge=0), skip: int = Query(0, ge=0)):
 
-    print("searching for - " + search_input)
-
-    results = await documents.search_content(search_input, skip, limit)
+    results = await documents.search_content(query, limit, skip)
 
     matches = []
 
@@ -26,9 +25,9 @@ async def serve_search_results(request: Request, search_input: str = Query(None,
 
     context = {
         "matches": matches,
-        "skip": skip,
+        "query": query,
         "limit": limit,
-        "search_input": search_input
+        "skip": skip
     }
 
-    return templates.TemplateResponse(request=request, name="searchResults.html", context=context)
+    return templates.TemplateResponse(request = request, name = "searchResults.html", context = context)
